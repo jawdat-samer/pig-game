@@ -29,6 +29,25 @@ const switchPlayer = function () {
     player1El.classList.toggle('player--active');
 };
 
+const reset = function () {
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0El.textContent = 0;
+    current1El.textContent = 0;
+
+    score[0] = 0;
+    score[1] = 0;
+    currentScore = 0;
+
+    player0El.classList.add('player--active');
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--active');
+    player1El.classList.remove('player--winner');
+
+    activePlayer = 0;
+    playing = true;
+};
+
 // Rolling dice functionality
 btnRoll.addEventListener('click', function () {
     if (playing) {
@@ -58,7 +77,7 @@ btnHold.addEventListener('click', function () {
         document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
 
         // check if player score is >= 100
-        if (score[activePlayer] >= 10) {
+        if (score[activePlayer] >= 100) {
             // finish the game
             playing = false;
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
@@ -77,3 +96,5 @@ btnHold.addEventListener('click', function () {
         }
     }
 });
+
+btnNew.addEventListener('click', reset);
